@@ -1,12 +1,13 @@
 /*--------------------------------------------------------------------------------------------------------------------------
-    Proesin çalışma dizinini chdir isimli POSIX fonksiyonuyla değiştirebiliriz. Fonksiyonun prototipi şöyledir:
+    Proesin çalışma dizinini chdir isimli POSIX fonksiyonuyla değiştirebiliriz. 
+    Fonksiyonun prototipi şöyledir:
 
     #include <unistd.h>
 
     int chdir(const char *path);
 
-    Fonksiyon yeni çalışma dizinin yol ifadesini parametre olarak alır. Başarı durumunda 0 değerine başarısızlık durumunda -1 değerine 
-    geri döner. 
+    Fonksiyon yeni çalışma dizinin yol ifadesini parametre olarak alır. 
+    Başarı durumunda 0 değerine başarısızlık durumunda -1 değerine geri döner. 
 ---------------------------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
