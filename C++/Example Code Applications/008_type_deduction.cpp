@@ -3,6 +3,16 @@
 int main()
 {
     //=======================auto x = expression;======================================
+    /*
+     * auto x = expr;
+     *  - expr. const T ise constluk duser(Kendisi const nesnelerde constluk duser)
+     *  - expr. T& ise referanslik duser
+     *  - expr. const T& ise constluk ve referanslik duser
+     *  - expr. dizi ismi array to pointer conv. olur. Array to pointer conv'da pointer dusmez.
+     *  - expr. const dizi ismi array to pointer conv. olur. Array to pointer conv'da constluk ve pointer dusmez.
+     *  - expr. yazi ise array to pointer conv. olur. Array to pointer conv'da constluk ve pointer dusmez.
+     *  - expr. fonksiyon adresi ise function to pointer conv. olur. x ifadenin turunu alir.
+     */
 
     int ival1 = 321;
     const int cival1 = 4;
@@ -26,13 +36,28 @@ int main()
     int foo(int, int);
     auto t9 = foo; // auto yerine gelen tür int(*)(int, int), t9'un türü int(*)(int, int) (function to pointer conversion)
 
+    //================================================================================
     //=======================autp& x = expression=====================================
+    /*
+     * auto & x = expr;
+     *  - Tur cikarimindan sonra x her zaman Lvalue referanstir.
+     *  - expr. T turu ise {auto:T), {x:T&}
+     *  - expr. const T ise {auto:const T}, {x:const T&}
+     *  - expr. const T ise {auto:const T}, {x:const T&}
+     *  - expr. Rvalue expr. ise error.(auto'dan once const var ise gecerli)
+     *  - expr. bir dizi ismi ise array to pointer conv. olmaz. x dizinin tamamina referans olur.
+     *  - expr. yazi ise array to pointer conv. olmaz. x yaziya referans olur. constluk dusmez.
+     *  - expr. fonksiyon adresi ise function to pointer conv. olmaz. x fonksiyona referans olur.
+     */
 
     int ival3 = 5;
     auto &t10 = ival3; // auto yerine gelen tür int, t10’un türü int&
 
     const int ival4 = 15;
     auto &t11 = ival4; // auto yerine gelen tür const int, t11’in türü const int&
+
+    auto &x1 = 10;       // Gecersiz. Ilk deger veren ifade Lvalue ifade olmali.
+    const auto &x2 = 10; // Gecerli. auto yerine gelen tur int, x2'nin turu const int&
 
     int ar3[5]{1, 2, 3, 4, 5};
     auto &t12 = ar3; // auto yerine gelen tür int[5], t12’nin türü int(&)[5], ar3 kullanilabilen her yerde t12 kullanilabilir.
@@ -47,29 +72,48 @@ int main()
     auto t14 = func;  // auto yerine gelen tür int(*)(int, int), t14’ün türü int (*)(int, int)
     auto &t15 = func; // auto yerine gelen tür int(&)(int, int), t15’in türü int (&)(int, int)
 
-    //=======================auto&& x = expression====================================
+    //==========auto&& x = expression(Forwarding(Universal) Reference)================
 
     auto &&t16 = 214; // auto yerine gelen tür int , t16’nın türü int &&
     // int &&t16 = 214;
+
     int ival4 = 132643;
-    auto &&t17 = ival4; // auto yerine gelen tür int& , t16’nın türü int & && ==> int &
+    auto &&t17 = ival4; // auto yerine gelen tür int& , t17’nın türü int & && ==> int &
     // int& &&t17 = ival4; ======> int &t17 = ival4;
 
-    //================decltype(expr): expr isim ise===================================
+    int &&r = 20;
+    auto &&t18 = std::move(r); // auto yerine gelen tur int&&, t18'in turu int&& && ==> int&&
 
+    //================decltype(expr): expr isim ise===================================
+    /*
+     * decltype(operand) x = expr; ile yapilan tur cikariminda operand bir isim ise:
+     *  - operand turu const T ise x'in turu const T (constluk dusmez)
+     *  - operand turu T& ise x'in turu T& (referanslik dusmez)
+     *  - operand turu dizi ismi ise array to pointer conv. olmaz. x'in turu dizinin turudur.
+     *  - operand turu string literali ise array to pointer conv. olmaz. x'in turu string literalinin turudur.
+     */
     const int ival5 = 546;
-    decltype(ival5) t18 = 4; // const int
+    decltype(ival5) t19 = 4; // const int
 
     int ar4[10]{};
-    decltype(ar4) t19; // int[10]
+    decltype(ar4) t20; // int[10]
 
-    decltype("Ali") t20; // const char[4], ilk değer verme mecburi
+    decltype("Ali") t21; // const char[4], ilk değer verme mecburi
 
     int ival6 = 5;
     int &rival6 = ival6;
-    decltype(rival6) t21; // int&, ilk deger verme mecburi
+    decltype(rival6) t22; // int&, ilk deger verme mecburi
 
     //=======decltype(expr): expr isim olmayan bir ifade ise=======
+    /*
+     * decltype(operand) x = expr; ile yapilan tur cikariminda operand isim olmayan bir ifade ise:
+     *  - operand olan ifadenin deger kategorisi PRvalue ise x operand olan ifadenin turudur.
+     *  - operand olan ifadenin deger kategorisi Lvalue ise x operand olan ifadenin turunun LValue referansidir.
+     *  - operand olan ifadenin deger kategorisi Xvalue ise x operand olan ifadenin turunun RValue referansidir.
+     *
+     *  - operand olan ifade sizeof operatorunde oldugu gibi unevaluated contex'tir.
+     *    Yani ifadedeki islem yapilmaz. Sadece tur icin bakilir.
+     */
 
     // Eger decltype(expr) icin: expr'nin deger kategorisi PRvalue ise cikarim yapilacak tur dogrudan ifadenin türüdür.
     int ival7 = 2;
