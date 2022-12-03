@@ -97,6 +97,19 @@ int main()
 }
 // ===================================================
 
+int main()
+{
+    int a[]{1, 2, 4};
+
+    int *&r14 = a; // Invalid. There is no array to pointer conv. because of '&' declarator
+    int *r14 = a;  // Valid. There is array to pointer conversion.
+
+    int *ptr = &a[0];
+    int *&r14 = ptr; // Valid.
+}
+
+// ===================================================
+
 #include <iostream>
 
 struct Data

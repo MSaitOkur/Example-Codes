@@ -191,3 +191,90 @@ int main()
     'foo' is : L value
     'std::move(foo)' is : L value
 */
+
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
+
+#include <iostream>
+
+template <typename T>
+struct ValCat
+{
+    static constexpr const char *p = "PR value";
+};
+
+template <typename T>
+struct ValCat<T &>
+{
+    static constexpr const char *p = "L value";
+};
+
+template <typename T>
+struct ValCat<T &&>
+{
+    static constexpr const char *p = "X value";
+};
+
+#define print_val_cat(expr) std::cout << "Value category of expr '" #expr "' is : " << ValCat<decltype((expr))>::p << '\n'
+
+struct Nec
+{
+    int a, b;
+};
+
+Nec f1();
+Nec &f2();
+Nec &&f3();
+
+int main()
+{
+    int x = 10;
+    const int y = 20;
+    int &r = x;
+    int &&rr = x + 5;
+    Nec nec;
+    Nec *ptr = &nec;
+    Nec &nr{nec};
+    int a[10];
+
+    print_val_cat(x);            
+    print_val_cat(x + 5);         
+    print_val_cat(&x);            
+    print_val_cat(&y);            
+    print_val_cat(y);            
+    print_val_cat(++x);          
+    print_val_cat(x++);           
+    print_val_cat(--x);          
+    print_val_cat(x--);           
+    print_val_cat((x, y));       
+    print_val_cat(x > 5 ? x : y);
+    print_val_cat(x > 5 ? x : 7); 
+    print_val_cat(x > y);         
+    print_val_cat(x && y);        
+    print_val_cat(+x);            
+    print_val_cat(-x);            
+    print_val_cat((double)x);    
+    print_val_cat(f1());          
+    print_val_cat(f2());         
+    print_val_cat(f3());         
+    print_val_cat(r);            
+    print_val_cat(rr);           
+    print_val_cat(nec);          
+    print_val_cat(nec.a);        
+    print_val_cat(ptr);          
+    print_val_cat(*ptr);         
+    print_val_cat(&ptr);          
+    print_val_cat(ptr->a);       
+    print_val_cat(&ptr->a);       
+    print_val_cat(ptr + 1);       
+    print_val_cat(a);            
+    print_val_cat(*a);           
+    print_val_cat(a + 3);         
+    print_val_cat(a[4]);         
+    print_val_cat(nr);           
+    print_val_cat(nr.a);         
+    print_val_cat(int());         
+    print_val_cat(int{});         
+    print_val_cat(Nec());         
+    print_val_cat(Nec{});         
+}
