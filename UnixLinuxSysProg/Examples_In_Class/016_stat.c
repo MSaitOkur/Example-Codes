@@ -33,14 +33,16 @@ int main(int argc, char *argv[])
         printf("number of blocks: %lld\n", (long long)finfo.st_blocks);
 
         pt = localtime(&finfo.st_mtim.tv_sec);
-        printf("last modification: %02d/%02d/%04d %02d:%02d:%02d\n", pt->tm_mday, pt->tm_mon + 1, pt->tm_year + 1900,
-               pt->tm_hour, pt->tm_min, pt->tm_sec);
+        printf("last modification: %02d/%02d/%04d %02d:%02d:%02d\n", pt->tm_mday,
+               pt->tm_mon + 1, pt->tm_year + 1900, pt->tm_hour, pt->tm_min, pt->tm_sec);
+
         pt = localtime(&finfo.st_atim.tv_sec);
-        printf("last access (read): %02d/%02d/%04d %02d:%02d:%02d\n", pt->tm_mday, pt->tm_mon + 1, pt->tm_year + 1900,
-               pt->tm_hour, pt->tm_min, pt->tm_sec);
+        printf("last access (read): %02d/%02d/%04d %02d:%02d:%02d\n", pt->tm_mday,
+               pt->tm_mon + 1, pt->tm_year + 1900, pt->tm_hour, pt->tm_min, pt->tm_sec);
+
         pt = localtime(&finfo.st_ctim.tv_sec);
-        printf("last i-node changed: %02d/%02d/%04d %02d:%02d:%02d\n", pt->tm_mday, pt->tm_mon + 1, pt->tm_year + 1900,
-               pt->tm_hour, pt->tm_min, pt->tm_sec);
+        printf("last i-node changed: %02d/%02d/%04d %02d:%02d:%02d\n", pt->tm_mday,
+               pt->tm_mon + 1, pt->tm_year + 1900, pt->tm_hour, pt->tm_min, pt->tm_sec);
 
         if (argc > 2)
             printf("-----------------\n");
@@ -58,8 +60,12 @@ void exit_sys(const char *msg)
 
 void disp_mode(mode_t mode)
 {
-    static mode_t modes[] = {S_IRUSR, S_IWUSR, S_IXUSR, S_IRGRP, S_IWGRP, S_IXGRP, S_IROTH, S_IWOTH, S_IXOTH};
-    static mode_t ftypes[] = {S_IFBLK, S_IFCHR, S_IFIFO, S_IFREG, S_IFDIR, S_IFLNK, S_IFSOCK};
+    static mode_t modes[] = {S_IRUSR, S_IWUSR, S_IXUSR,
+                             S_IRGRP, S_IWGRP, S_IXGRP,
+                             S_IROTH, S_IWOTH, S_IXOTH};
+
+    static mode_t ftypes[] = {S_IFBLK, S_IFCHR, S_IFIFO,
+                              S_IFREG, S_IFDIR, S_IFLNK, S_IFSOCK};
 
     for (int i = 0; i < 7; ++i)
         if ((mode & S_IFMT) == ftypes[i])

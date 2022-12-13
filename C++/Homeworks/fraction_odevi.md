@@ -10,7 +10,7 @@ Bu ödevde `Fraction` sınıfının kodlarını yazmanız isteniyor.
 ### Aşağıdaki açıklamalar kodda bulunan yorum satırlarına ilişkindir:
 
 1. Pay `(numerator)` ve payda `(denominator)` isteyen kurucu işlev.
-2. Kurucu işlev. Oluşturulacak rasyonel sayının değeri argüman olarak alınan `double` değere yakın olmalı.
+2. Kurucu işlev. Oluşturulacak rasyonel sayının değeri argüman olarak alınan `double`   değere yakın olmalı.
 3. Kurucu işlev. Oluşturulacak rasyonel sayının değeri argüman olarak gelen `std::string` nesnesinden alınacak.
 4. Toplama işlemli atama operatör fonksiyonu. (üye operatör fonksiyonu olmalı)
 5. Çıkartma işlemli atama operatör fonksiyonu. (üye operatör fonksiyonu olmalı)
