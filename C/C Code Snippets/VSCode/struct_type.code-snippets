@@ -1,0 +1,9 @@
+{
+	"struct_type": {
+		"prefix": "ss",
+		"body": [
+			"struct $0"
+		],
+		"description": "struct_type"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"include<functional>": {
+		"prefix": "iff",
+		"body": [
+		  "#include<functional>",
+		  "$0"
+		],
+		"description": "include<functional>"
+	  }
+}

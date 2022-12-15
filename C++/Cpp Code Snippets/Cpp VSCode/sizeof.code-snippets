@@ -1,0 +1,9 @@
+{
+	"sizeof": {
+		"prefix": "szf",
+		"body": [
+		  "std::cout << \"sizeof($1) = \" << sizeof($1) << '\\n';$0"
+		],
+		"description": "sizeof"
+	}
+}

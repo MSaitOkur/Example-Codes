@@ -1,0 +1,9 @@
+{
+	"print line": {
+		"prefix": "pline",
+		"body": [
+			"fprintf(stdout, \"\\n----------------------------------------\\n\");"
+		],
+		"description": "print line"
+	}
+}

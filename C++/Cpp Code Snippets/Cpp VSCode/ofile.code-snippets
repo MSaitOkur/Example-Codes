@@ -1,0 +1,15 @@
+{
+	"ofile": {
+		"prefix": "ofile",
+		"body": [
+			"std::ofstream ofs{\"${1:out.txt}\"};",
+			"if(!ofs)",
+			"{",
+			"    std::cerr << \"${1:out.txt} dosyasi olusturulamadi\\n\";",
+			"    std::exit(EXIT_FAILURE);",
+			"}",
+			"$0"
+		],
+		"description": "ofile"
+	}
+}

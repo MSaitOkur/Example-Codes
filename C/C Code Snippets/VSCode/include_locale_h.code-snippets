@@ -1,0 +1,10 @@
+{
+	"include_locale.h": {
+		"prefix": "ilo",
+		"body": [
+			"#include <locale.h>",
+			"$0"
+		],
+		"description": "include_locale.h"
+	}
+}

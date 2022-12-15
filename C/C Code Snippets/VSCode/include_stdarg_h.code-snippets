@@ -1,0 +1,10 @@
+{
+	"include_stdarg.h": {
+		"prefix": "iarg",
+		"body": [
+			"#include <stdarg.h>",
+			"$0"
+		],
+		"description": "include_stdarg.h"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"string_yaz_size_capacity": {
+		"prefix": "syaz",
+		"body": [
+		  "std::cout << \"[\" << ${1:str}.size() << \"] [\" << ${1:str}.capacity() << \"] [\" << ${1:str} << \"]\\n\";$0"
+		],
+		"description": "string_yaz_size_capacity"
+	  }
+}

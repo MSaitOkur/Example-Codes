@@ -1,0 +1,15 @@
+{
+	"open_file_write": {
+		"prefix": "ofw",
+		"body": [
+			"FILE *f;",
+			"if((f = fopen(\"${1:filename.txt}\", \"w\")) == NULL)",
+			"{",
+			"    fprintf(stderr, \"${1:filename.txt} isimli dosya olusturulamadi!...\\n\");",
+			"    exit(EXIT_FAILURE);",
+			"}",
+			""
+		],
+		"description": "open_file_write"
+	}
+}

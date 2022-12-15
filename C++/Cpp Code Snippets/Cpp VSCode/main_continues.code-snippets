@@ -1,0 +1,9 @@
+{
+	"main continues": {
+		"prefix": "mc",
+		"body": [
+		  "std::cout << \"main continues.\\n\";$0"
+		],
+		"description": "main continues."
+	}
+}

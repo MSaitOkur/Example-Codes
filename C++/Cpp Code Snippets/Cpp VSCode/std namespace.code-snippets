@@ -1,0 +1,9 @@
+{
+	"std::": {
+		"prefix": "ss",
+		"body": [
+			"std::$0"
+		],
+		"description": "std::"
+	}
+}

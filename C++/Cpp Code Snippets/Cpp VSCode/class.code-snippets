@@ -1,0 +1,16 @@
+{
+	"class": {
+		"prefix": "cc",
+		"body": [
+		  "class $1 {",
+		  "public:",
+		  "    $0",
+		  "private:",
+		  "    ",
+		  "};",
+		  "",
+		  ""
+		],
+		"description": "class"
+	}
+}

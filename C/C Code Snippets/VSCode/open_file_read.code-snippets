@@ -1,0 +1,15 @@
+{
+	"open_file_read": {
+		"prefix": "ofr",
+		"body": [
+			"FILE *f;",
+			"if((f = fopen(\"${1:filename.txt}\", \"r\")) == NULL)",
+			"{",
+			"    fprintf(stderr, \"${1:filename.txt} isimli dosya acilamadi!...\\n\");",
+			"    exit(EXIT_FAILURE);",
+			"}",
+			""
+		],
+		"description": "open_file_read"
+	}
+}

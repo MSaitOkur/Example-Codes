@@ -1,0 +1,14 @@
+{
+	"MultipleInclusionGuard": {
+		"prefix": "guard",
+		"body": [
+			"#ifndef ${1:header}",
+			"#define ${1:header}",
+			"",
+			"    $0",
+			"",
+			"#endif // ${1:header}"
+		],
+		"description": "MultipleInclusionGuard"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"include<list>": {
+		"prefix": "il",
+		"body": [
+			"#include<list>",
+			"$0"
+		],
+		"description": "include<list>"
+	}
+}

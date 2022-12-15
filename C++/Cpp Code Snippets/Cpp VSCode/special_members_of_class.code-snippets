@@ -1,0 +1,22 @@
+{
+	"special members of class": {
+		"prefix": "scl",
+		"body": [
+		  "class ${1:Myclass}{",
+		  "public:",
+		  "    ${1:${1:Myclass}}();",
+		  "    ${1:Myclass}(int x);",
+		  "    ${1:Myclass}(const ${1:Myclass} &other);",
+		  "    ${1:Myclass}& operator=(const ${1:Myclass} &other);",
+		  "    ${1:Myclass}(${1:Myclass}&& other);",
+		  "    ${1:Myclass}& operator=(${1:Myclass} &&other);",
+		  "    ~${1:Myclass}();",
+		  " private:",
+		  "    ",
+		  "};",
+		  "$0",
+		  ""
+		],
+		"description": "special members of class"
+	}
+}

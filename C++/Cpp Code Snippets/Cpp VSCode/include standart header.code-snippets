@@ -1,0 +1,10 @@
+{
+	"include standart header": {
+		"prefix": "ihs",
+		"body": [
+			"#include <$1>",
+			"$0"
+		],
+		"description": "include standart header"
+	}
+}

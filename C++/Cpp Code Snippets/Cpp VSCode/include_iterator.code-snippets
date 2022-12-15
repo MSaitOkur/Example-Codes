@@ -1,0 +1,10 @@
+{
+	"include<iterator>": {
+		"prefix": "iit",
+		"body": [
+		  "#include<iterator>",
+		  "$0"
+		],
+		"description": "include<iterator>"
+	  }
+}

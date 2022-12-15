@@ -1,0 +1,9 @@
+{
+	"std::cout": {
+		"prefix": "co1",
+		"body": [
+		  "std::cout << \"$1 = \" << $1 << '\\n';$0"
+		],
+		"description": "std::cout"
+	  }
+}

@@ -1,0 +1,9 @@
+{
+	"print 1 integer output ": {
+		"prefix": "pi1",
+		"body": [
+			"printf(\"$1 = %d\\n\", $1);$0"
+		],
+		"description": "print 1 integer output "
+	}
+}

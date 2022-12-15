@@ -1,0 +1,10 @@
+{
+	"include<vector>": {
+		"prefix": "iv",
+		"body": [
+		  "#include<vector>",
+		  "$0"
+		],
+		"description": "include<vector>"
+	  }
+}

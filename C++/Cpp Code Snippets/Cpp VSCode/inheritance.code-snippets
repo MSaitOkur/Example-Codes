@@ -1,0 +1,22 @@
+{
+	"inheritance": {
+		"prefix": "inh",
+		"body": [
+		  "class ${1:Base} { ",
+		  "public:",
+		  "    $0",
+		  "private:",
+		  "",
+		  "};",
+		  "",
+		  "class ${2:Der} : public ${1:Base} {",
+		  "public:",
+		  "",
+		  "private:",
+		  "",
+		  "};",
+		  ""
+		],
+		"description": "inheritance"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"include_header_no_standart": {
+		"prefix": "ihn",
+		"body": [
+			"#include \"$0\""
+		],
+		"description": "include_header_no_standart"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"message_standart_error": {
+		"prefix": "merr",
+		"body": [
+			"fprintf(stderr, \"$0\");"
+		],
+		"description": "message_standart_error"
+	}
+}

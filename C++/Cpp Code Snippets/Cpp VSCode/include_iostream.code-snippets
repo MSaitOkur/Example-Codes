@@ -1,0 +1,10 @@
+{
+	"include<iostream>": {
+		"prefix": "ii",
+		"body": [
+		  "#include<iostream>",
+		  "$0"
+		],
+		"description": "include<iostream>"
+	  }
+}

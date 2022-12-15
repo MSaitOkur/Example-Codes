@@ -1,0 +1,10 @@
+{
+	"include<deque>": {
+		"prefix": "ideq",
+		"body": [
+		  "#include<deque>",
+		  "$0"
+		],
+		"description": "include<deque>"
+	  }
+}

@@ -1,0 +1,9 @@
+{
+	"include_header_standart": {
+		"prefix": "ihs",
+		"body": [
+			"#include <$0>"
+		],
+		"description": "include_header_standart"
+	}
+}

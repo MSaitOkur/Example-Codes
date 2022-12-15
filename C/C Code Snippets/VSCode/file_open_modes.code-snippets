@@ -1,0 +1,9 @@
+{
+	"open_modes": {
+		"prefix": "omodes",
+		"body": [
+			"mode_t modes[] = {S_IXOTH, S_IWOTH, S_IROTH, S_IXGRP, S_IWGRP, S_IRGRP, S_IXUSR, S_IWUSR, S_IRUSR};$0"
+		],
+		"description": "open_modes"
+	}
+}

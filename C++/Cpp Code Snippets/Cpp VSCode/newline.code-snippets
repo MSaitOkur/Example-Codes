@@ -1,0 +1,9 @@
+{
+	"newline": {
+		"prefix": "nl",
+		"body": [
+		  "std::cout << \"\\n\";"
+		],
+		"description": "newline"
+	}
+}

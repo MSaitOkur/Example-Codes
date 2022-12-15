@@ -1,0 +1,9 @@
+{
+	"include_assert_h": {
+		"prefix": "iassert",
+		"body": [
+			"#include <assert.h>$0"
+		],
+		"description": "include_assert_h"
+	}
+}

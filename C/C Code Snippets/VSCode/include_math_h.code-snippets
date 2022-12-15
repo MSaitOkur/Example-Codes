@@ -1,0 +1,10 @@
+{
+	"include_math.h": {
+		"prefix": "imath",
+		"body": [
+			"#include <math.h>",
+			"$0"
+		],
+		"description": "include_math.h"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"message": {
+		"prefix": "mes",
+		"body": [
+		  "std::cout << \"$0\""
+		],
+		"description": "message"
+	  }
+}

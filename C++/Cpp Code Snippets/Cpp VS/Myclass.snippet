@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>MyClass Snippet</Title>
+            <Author>Sait Okur</Author>
+            <Shortcut>cclass</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="cpp">
+                <![CDATA[
+                class $Myclass${
+                public:
+                    $Myclass$(){std::cout << "default ctor called this : " << this << "\n";}
+                    $Myclass$(int x){std::cout << "Myclass(int x ) called  x = " << x << " this : " << this << "\n";}
+                    $Myclass$(const $Myclass$ &other){std::cout << "copy ctor called this : " << this << "\n";}
+                    $Myclass$($Myclass$&& other){std::cout << "move ctor called this : " << this << "\n";}
+                    $Myclass$& operator=(const $Myclass$ &other){std::cout << "copy assignment called\n"; return *this;}
+                    $Myclass$& operator=($Myclass$ &&other){std::cout << "move assignment called\n"; return *this;};
+                    ~$Myclass$(){std::cout << "destructor called this : " << this << "\n";}
+
+                private:
+
+                };
+                ]]>
+            </Code>
+            <Declarations>
+                <Literal>
+                    <ID>Myclass</ID>
+                    <Default>Myclass</Default>
+                </Literal>
+            </Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

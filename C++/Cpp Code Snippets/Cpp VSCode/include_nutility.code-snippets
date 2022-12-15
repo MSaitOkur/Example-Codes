@@ -1,0 +1,10 @@
+{
+	"include_Nutility": {
+		"prefix": "inn",
+		"body": [
+		  "#include \"nutility.h\"",
+		  "$0"
+		],
+		"description": "include_Nutility"
+	}
+}

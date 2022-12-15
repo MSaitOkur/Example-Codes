@@ -1,0 +1,10 @@
+{
+	"include_time.h": {
+		"prefix": "itime",
+		"body": [
+			"#include <time.h>",
+			"$0"
+		],
+		"description": "include_time.h"
+	}
+}

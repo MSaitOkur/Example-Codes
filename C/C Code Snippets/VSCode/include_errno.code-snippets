@@ -1,0 +1,9 @@
+{
+	"include_errno": {
+		"prefix": "ierr",
+		"body": [
+			"#include <errno.h>$0"
+		],
+		"description": "include_errno"
+	}
+}

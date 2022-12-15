@@ -1,0 +1,12 @@
+{
+	"main": {
+		"prefix": "mm",
+		"body": [
+			"int main(int argc, char **argv)",
+			"{",
+			"    $0",
+			"}"
+		],
+		"description": "main"
+	}
+}

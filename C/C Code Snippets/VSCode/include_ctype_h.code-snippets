@@ -1,0 +1,10 @@
+{
+	"include_ctype.h": {
+		"prefix": "ic",
+		"body": [
+			"#include <ctype.h>",
+			"$0"
+		],
+		"description": "include_ctype.h"
+	}
+}

@@ -1,0 +1,36 @@
+{
+	"special members of class inline": {
+		"prefix": "scli",
+		"body": [
+		  "class ${1:Myclass}{",
+		  "public:",
+		  "    ${1:${1:Myclass}}(){",
+		  "        std::cout << \"${1:Myclass}() called for this : \" << this << \"\\n\";",
+		  "    }",
+		  "    ${1:Myclass}(int x){",
+		  "        std::cout << \"${1:Myclass}(int x) called  x = \" << x << \" for this : \" << this << \"\\n\";",
+		  "    }",
+		  "    ${1:Myclass}(const ${1:Myclass} &other){",
+		  "        std::cout << \"${1:Myclass}(const ${1:Myclass}&) called for this : \" << this << \" &other : \" << &other << \"\\n\";",
+		  "    }",
+		  "    ${1:Myclass}& operator=(const ${1:Myclass} &other){",
+		  "        std::cout << \"${1:Myclass}& operator=(const ${1:Myclass}&) called for this: \" << this << \" &other : \" << &other << \"\\n\"; return *this;",
+		  "    }",
+		  "    ${1:Myclass}(${1:Myclass}&& other){",
+		  "        std::cout << \"${1:Myclass}(${1:Myclass}&&) for this : \" << this << \" &other : \" << &other << \"\\n\";",
+		  "    }",
+		  "    ${1:Myclass}& operator=(${1:Myclass} &&other){",
+		  "        std::cout << \"${1:Myclass}& operator=(${1:Myclass}&&)called for this : \" << this << \" &other : \" << &other << \"\\n\"; return *this;",
+		  "    }",
+		  "    ~${1:Myclass}(){",
+		  "        std::cout << \"~${1:Myclass}() called for this : \" << this << \"\\n\";",
+		  "    }",
+		  " private:",
+		  "    ",
+		  "};",
+		  "$0",
+		  ""
+		],
+		"description": "special members of class inline"
+	  }
+}

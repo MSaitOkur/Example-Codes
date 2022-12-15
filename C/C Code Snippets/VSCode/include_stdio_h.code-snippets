@@ -1,0 +1,9 @@
+{
+	"include_stdio.h": {
+		"prefix": "ii",
+		"body": [
+			"#include <stdio.h>","$0"
+		],
+		"description": "include_stdio.h"
+	}
+}

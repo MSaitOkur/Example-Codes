@@ -1,0 +1,11 @@
+{
+	"comments": {
+		"prefix": "com",
+		"body": [
+			"/* $0",
+			" * ",
+			" */"
+		],
+		"description": "comments"
+	}
+}

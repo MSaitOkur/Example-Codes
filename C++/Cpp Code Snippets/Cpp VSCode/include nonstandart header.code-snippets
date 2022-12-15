@@ -1,0 +1,10 @@
+{
+	"include nonstandart header": {
+		"prefix": "ihn",
+		"body": [
+		  "#include \"$1\"",
+		  "$0"
+		],
+		"description": "include nonstandart header"
+	}
+}

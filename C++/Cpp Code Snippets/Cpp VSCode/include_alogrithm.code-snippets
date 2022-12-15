@@ -1,0 +1,11 @@
+{
+	"include<algorithm>": {
+		"prefix": "ia",
+		"body": [
+		  "#include<algorithm>",
+		  "$0"
+
+		],
+		"description": "include<algorithm>"
+	  }
+}

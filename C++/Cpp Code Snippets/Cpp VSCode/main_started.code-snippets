@@ -1,0 +1,9 @@
+{
+	"main_basladi": {
+		"prefix": "ms",
+		"body": [
+		  "std::cout << \"main started.\\n\";$0"
+		],
+		"description": "main started."
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"include<string>": {
+		"prefix": "is",
+		"body": [
+		  "#include<string>",
+		  "$0"
+		],
+		"description": "include<string>"
+	  }
+}

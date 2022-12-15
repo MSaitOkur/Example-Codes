@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Değer Kategorisi Çıkarımı</Title>
+            <Author>Sait Okur</Author>
+            <Shortcut>pvc</Shortcut>
+        </Header>
+        <Snippet>
+        <Code Language="cpp">
+            <![CDATA[#define pvc(x)    (std::cout << "value category of '" #x << "' is : " << Valcat<decltype((x))>::pvcat << "\n")
+
+template<typename T>
+struct Valcat {
+	constexpr static const char* pvcat = "R value";
+};
+
+template<typename T>
+struct Valcat<T&> {
+	constexpr static const char* pvcat = "L value";
+};
+
+template<typename T>
+struct Valcat<T&&> {
+	constexpr static const char* pvcat = "X value";
+};
+]]>
+        </Code>
+        <Declarations>
+            <Literal>
+                <ID></ID>
+                <ToolTip></ToolTip>
+                <Default></Default>
+            </Literal>
+        </Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

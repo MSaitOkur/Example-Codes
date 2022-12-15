@@ -1,0 +1,10 @@
+{
+	"include_stdlib.h": {
+		"prefix": "ilib",
+		"body": [
+			"#include <stdlib.h>",
+			"$0"
+		],
+		"description": "include_stdlib.h"
+	}
+}

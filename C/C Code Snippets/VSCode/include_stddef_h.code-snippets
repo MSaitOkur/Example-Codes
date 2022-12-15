@@ -1,0 +1,10 @@
+{
+	"include_stddef.h": {
+		"prefix": "idef",
+		"body": [
+			"#include <stddef.h>",
+			"$0"
+		],
+		"description": "include_stddef.h"
+	}
+}

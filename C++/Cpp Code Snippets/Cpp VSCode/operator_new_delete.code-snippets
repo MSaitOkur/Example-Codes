@@ -1,0 +1,28 @@
+{
+	"operator_new_delete": {
+		"prefix": "new_delete",
+		"body": [
+		  "#include <cstdlib>",
+		  "void * operator new(std::size_t n)",
+		  "{",
+		  "    std::cout << \"operator new called n : \" << n << \"\\n\";",
+		  "    void *vp = std::malloc(n);",
+		  "    if(!vp)",
+		  "        throw std::bad_alloc{};",
+		  "    ",
+		  "    std::cout << \"address of allocated block : \" << vp << \"\\n\";",
+		  "    return vp;",
+		  "}       ",
+		  "",
+		  "void operator delete(void *vp)",
+		  "{",
+		  "    std::cout << \"operator delete called vp : \" << vp << \"\\n\";",
+		  "    if(vp)",
+		  "        std::free(vp);",
+		  "}",
+		  "$0"
+		],
+		"description": "operator_new_delete"
+	  }
+	
+}

@@ -1,0 +1,9 @@
+{
+	"template": {
+		"prefix": "tt",
+		"body": [
+		  "template<typename $0>"
+		],
+		"description": "template"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"message_standart_output": {
+		"prefix": "mo",
+		"body": [
+			"fprintf(stdout, \"$0\");"
+		],
+		"description": "message_standart_output"
+	}
+}

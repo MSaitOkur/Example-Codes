@@ -1,0 +1,10 @@
+{
+	"include_date": {
+		"prefix": "idate",
+		"body": [
+		  "#include \"date.h\"",
+		  "$0"
+		],
+		"description": "include_date"
+	}
+}

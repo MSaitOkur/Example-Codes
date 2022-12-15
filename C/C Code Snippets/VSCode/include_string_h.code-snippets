@@ -1,0 +1,10 @@
+{
+	"include_string.h": {
+		"prefix": "is",
+		"body": [
+			"#include <string.h>",
+			"$0"
+		],
+		"description": "include_string.h"
+	}
+}

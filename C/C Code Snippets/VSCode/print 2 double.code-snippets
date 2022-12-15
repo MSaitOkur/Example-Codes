@@ -1,0 +1,9 @@
+{
+	"print 2 doubles output ": {
+		"prefix": "pd2",
+		"body": [
+			"printf(\"$1 = %f, $2 = %f\\n\", $1, $2);$0"
+		],
+		"description": "print 2 doubles output "
+	}
+}

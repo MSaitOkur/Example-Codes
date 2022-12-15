@@ -1,0 +1,12 @@
+{
+	"main_2": {
+		"prefix": "mmm",
+		"body": [
+			"int main()",
+			"{",
+			"    $0",
+			"}"
+		],
+		"description": "main_2"
+	}
+}
