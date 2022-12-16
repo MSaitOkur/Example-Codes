@@ -206,5 +206,68 @@ public:
 
 //=======================================
 
+#include <iostream>
 
+class Base
+{
+public:
+    void func(int)
+    {
+        std::cout << "Base::func(int) \n";
+    }
+};
+
+class Der : public Base
+{
+public:
+    void func()
+    {
+        std::cout << "Der::func() \n";
+    }
+    void func(int x) // Forwarding Function
+    {
+        Base::func(x);
+    }
+};
+
+int main()
+{
+    Der mder;
+    mder.func(12); // Forwarding Function Call
+    mder.func();
+}
+
+//--------------------------------------------------------------------
+//--------------------------------------------------------------------
+
+/* For the public inheritance, derived classes can reach the private part of base class.
+ * Other codes than the derived class cannot reach protected part of base class.
+ * Protected part of base classes is an interface for derived classes.
+ */
+
+#include <iostream>
+
+class Base
+{
+protected:
+    void func(int)
+    {
+        std::cout << "Base::func(int) \n";
+    }
+};
+
+class Der : public Base
+{
+public:
+    void foo(int x)
+    {
+        func(x); // Valid,  Base::func(int)
+    }
+};
+
+int main()
+{
+    Der mder;
+    mder.func(12); // Base::func(int), Access Error
+}
 
