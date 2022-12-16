@@ -271,3 +271,50 @@ int main()
     mder.func(12); // Base::func(int), Access Error
 }
 
+// ====================== Inclass Using Declaration ============================
+// ====================== Inclass Using Declaration ============================
+// ====================== Inclass Using Declaration ============================
+
+/* If a name which belongs to base class is declared with using keyword inside of derived class,
+ * this name will be injected to derived class which means it can be used without '::' operator.
+ * This name will also be visible for client codes of derived class.
+ */
+
+#include <iostream>
+class Base
+{
+public:
+    void func(int)
+    {
+        std::cout << "Base::func(int) \n";
+    }
+    void func(int, int)
+    {
+        std::cout << "Base::func(int, int ) \n";
+    }
+    void func(double, double)
+    {
+        std::cout << "Base::func(double, double) \n";
+    }
+};
+class Der : public Base
+{
+public:
+    using Base::func;
+    void func(int)
+    {
+        std::cout << "Der::func(int) \n";
+    }
+    void func(double)
+    {
+        std::cout << "Der::func(double) \n";
+    }
+};
+int main()
+{
+    Der myder;
+    myder.func(13); // Der, çünkü this = Der* olduğu için exact match. Basedeki this = Base * 
+    myder.func(13, 23);
+    myder.func(1.3);
+    myder.func(1.3, 2.3);
+}
