@@ -6,6 +6,24 @@
 #include <cstring>
 #include <cstdlib>
 
+class BadDate : public std::exception
+{
+public:
+	BadDate(int day, int mon, int year)
+		: err_msg{"Invalid Date: " + std::to_string(day) + "/" +
+				  std::to_string(mon) + "/" + std::to_string(year)} {}
+
+	BadDate(std::string err_str) : err_msg{"Invalid Date: " + err_str} {}
+
+	const char *what() const noexcept override
+	{
+		return err_msg.c_str();
+	}
+
+private:
+	std::string err_msg{};
+};
+
 class Date
 {
 public: // public nested types
@@ -36,15 +54,12 @@ public: // public nested types
 	};
 
 public: // public member funtions
-	constexpr Date() {}
-	// constexpr Date(int d, int m, int y) : md{d}, mm{m}, my{y} // exception handling
+	constexpr Date() noexcept {}
+
 	Date(int d, int m, int y) : md{d}, mm{m}, my{y}
 	{
 		if (!Date::is_valid(md, mm, my))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{d, m, y};
 	}
 	Date(const char *p)
 		: md{std::atoi(p)},
@@ -52,10 +67,7 @@ public: // public member funtions
 		  my{std::atoi(std::strrchr(p, '/') + 1)}
 	{
 		if (!Date::is_valid(md, mm, my))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{p};
 	}
 	Date(std::time_t timer)
 		: md{std::localtime(&timer)->tm_mday},
@@ -63,16 +75,13 @@ public: // public member funtions
 		  my{std::localtime(&timer)->tm_year + year_base}
 	{
 		if (!Date::is_valid(md, mm, my))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{md, mm, my};
 	}
 
-	constexpr int get_month_day() const { return md; }
-	constexpr int get_month() const { return mm; }
-	constexpr int get_year() const { return my; }
-	int get_year_day() const
+	constexpr int get_month_day() const noexcept { return md; }
+	constexpr int get_month() const noexcept { return mm; }
+	constexpr int get_year() const noexcept { return my; }
+	int get_year_day() const noexcept
 	{
 		int year_day = md;
 
@@ -104,7 +113,7 @@ public: // public member funtions
 
 		return year_day;
 	}
-	Weekday get_week_day() const
+	Weekday get_week_day() const noexcept
 	{
 		static const int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
 
@@ -120,21 +129,14 @@ public: // public member funtions
 	Date &set_month_day(int day)
 	{
 		if (!Date::is_valid(day, mm, my))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
-
+			throw BadDate{day, mm, my};
 		md = day;
 		return *this;
 	}
 	Date &set_month(int month)
 	{
 		if (!Date::is_valid(md, month, my))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{md, month, my};
 
 		mm = month;
 		return *this;
@@ -142,10 +144,7 @@ public: // public member funtions
 	Date &set_year(int year)
 	{
 		if (!Date::is_valid(md, mm, year))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{md, mm, year};
 
 		my = year;
 		return *this;
@@ -153,10 +152,7 @@ public: // public member funtions
 	Date &set(int day, int mon, int year)
 	{
 		if (!Date::is_valid(day, mon, year))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{day, mon, year};
 
 		md = day;
 		mm = mon;
@@ -165,7 +161,7 @@ public: // public member funtions
 		return *this;
 	}
 
-	Date operator+(int day) const
+	Date operator+(int day) const noexcept
 	{
 		if (md + day <= Date::dayLookup[Date::is_leap(my)][mm])
 			return Date{md + day, mm, my};
@@ -174,7 +170,7 @@ public: // public member funtions
 
 		return Date::go_to_day_next(*this, day);
 	}
-	Date &operator+=(int day)
+	Date &operator+=(int day) noexcept
 	{
 		if (md + day <= Date::dayLookup[Date::is_leap(my)][mm])
 			this->md += day;
@@ -193,7 +189,7 @@ public: // public member funtions
 		else if (get_year_day() - day >= 1)
 			return Date::get_date_from_day_of_year(get_year_day() - day, my);
 
-		return Date::go_to_day_prev(*this, day);
+		return Date::go_to_day_prev(*this, day); // if date is invalid go_to_day_prev will throw exception.
 	}
 	Date &operator-=(int day)
 	{
@@ -202,12 +198,12 @@ public: // public member funtions
 		else if (get_year_day() - day >= 1)
 			*this = Date::get_date_from_day_of_year(get_year_day() - day, my);
 		else
-			*this = Date::go_to_day_prev(*this, day);
+			*this = Date::go_to_day_prev(*this, day); // if date is invalid go_to_day_prev will throw exception.
 
 		return *this;
 	}
 
-	Date &operator++()
+	Date &operator++() noexcept
 	{
 		if (md < dayLookup[Date::is_leap(my)][mm])
 			++md;
@@ -225,7 +221,7 @@ public: // public member funtions
 
 		return *this;
 	}
-	Date operator++(int)
+	Date operator++(int) noexcept
 	{
 		Date temp{*this};
 		++*this;
@@ -245,6 +241,9 @@ public: // public member funtions
 			md = 31;
 			mm = 12;
 			--my;
+
+			if (my < 1900)
+				throw BadDate{md, mm, my};
 		}
 
 		return *this;
@@ -256,18 +255,18 @@ public: // public member funtions
 		return temp;
 	}
 
-	constexpr friend bool operator<(const Date &d1, const Date &d2)
+	constexpr friend bool operator<(const Date &d1, const Date &d2) noexcept
 	{
 		return d1.my < d2.my ||
 			   (d1.my == d2.my && d1.mm < d2.mm) ||
 			   (d1.my == d2.my && d1.mm == d2.mm && d1.md < d2.md);
 	}
-	constexpr friend bool operator==(const Date &d1, const Date &d2)
+	constexpr friend bool operator==(const Date &d1, const Date &d2) noexcept
 	{
 		return d1.md == d2.md && d1.mm == d2.mm && d1.my == d2.my;
 	}
 
-	friend int operator-(const Date &d1, const Date &d2)
+	friend int operator-(const Date &d1, const Date &d2) noexcept
 	{
 		int result;
 
@@ -291,46 +290,44 @@ public: // public member funtions
 			result += Date::is_leap(i) ? 366 : 365;
 		return result * -1;
 	}
-
-	friend Date operator+(const Date &date, int n)
+	friend Date operator+(const Date &date, int n) noexcept
 	{
 		return Date::go_to_day_next(date, n);
 	}
-	friend Date operator+(int n, const Date &date)
+	friend Date operator+(int n, const Date &date) noexcept
 	{
 		return Date::go_to_day_next(date, n);
 	}
 
-	friend Date::Weekday &operator++(Date::Weekday &wd)
+	friend Date::Weekday &operator++(Date::Weekday &wd) noexcept
 	{
 		return wd = wd == Date::Weekday::Saturday ? Date::Weekday::Sunday
 												  : static_cast<Date::Weekday>(static_cast<int>(wd) + 1);
 	}
-	friend Date::Weekday operator++(Date::Weekday &wd, int)
+	friend Date::Weekday operator++(Date::Weekday &wd, int) noexcept
 	{
 		Date::Weekday wd_temp{wd};
 		++wd;
 		return wd_temp;
 	}
-	friend Date::Weekday &operator--(Date::Weekday &wd)
+	friend Date::Weekday &operator--(Date::Weekday &wd) noexcept
 	{
 		return wd = wd == Date::Weekday::Sunday ? Date::Weekday::Saturday
 												: static_cast<Date::Weekday>(static_cast<int>(wd) - 1);
 	}
-	friend Date::Weekday operator--(Date::Weekday &wd, int)
+	friend Date::Weekday operator--(Date::Weekday &wd, int) noexcept
 	{
 		Date::Weekday wd_temp{wd};
 		--wd;
 		return wd_temp;
 	}
 
-	friend std::ostream &operator<<(std::ostream &os, const Date &date)
+	friend std::ostream &operator<<(std::ostream &os, const Date &date) noexcept
 	{
 		return os << date.md << ' '
 				  << Date::month_names[date.mm] << ' '
 				  << date.my << ' '
-				  << Date::day_names[static_cast<int>(date.get_week_day())]
-				  << '\n';
+				  << Date::day_names[static_cast<int>(date.get_week_day())];
 	}
 	friend std::istream &operator>>(std::istream &is, Date &date)
 	{
@@ -341,16 +338,13 @@ public: // public member funtions
 		is >> date.my;
 
 		if (!Date::is_valid(date.md, date.mm, date.my))
-		{
-			std::cerr << "Invalid date!!!...\n";
-			exit(EXIT_FAILURE);
-		}
+			throw BadDate{date.md, date.mm, date.my};
 
 		return is;
 	}
 
 public: // static public member functions
-	static Date random_date()
+	static Date random_date() noexcept
 	{
 		int year = rand() % (random_max_year + 1 - random_min_year) + random_min_year;
 		int month = rand() % 12 + 1;
@@ -358,19 +352,19 @@ public: // static public member functions
 
 		return Date{day, month, year};
 	}
-	static constexpr bool is_leap(int y)
+	static constexpr bool is_leap(int y) noexcept
 	{
 		return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
 	}
 
 private: // static private member functions
-	constexpr static bool is_valid(int d, int m, int y)
+	constexpr static bool is_valid(int d, int m, int y) noexcept
 	{
 		return y >= year_base &&
 			   d && d <= dayLookup[Date::is_leap(y)][m] &&
 			   m && m <= 12;
 	}
-	static Date get_date_from_day_of_year(int day_of_year, int year)
+	static Date get_date_from_day_of_year(int day_of_year, int year) noexcept
 	{
 		int day;
 		int month = 1;
@@ -389,7 +383,7 @@ private: // static private member functions
 
 		return Date{day, month, year};
 	}
-	static Date go_to_day_next(Date d, int plus_days)
+	static Date go_to_day_next(Date d, int plus_days) noexcept
 	{
 		plus_days -= (Date::is_leap(d.my) ? 366 : 365) - d.get_year_day();
 
@@ -417,7 +411,11 @@ private: // static private member functions
 			--d.my;
 		}
 
-		return !minus_days ? d : get_date_from_day_of_year((Date::is_leap(d.my) ? 366 : 365) - minus_days, d.my);
+		Date &&result_date = minus_days == 0 ? d : get_date_from_day_of_year((Date::is_leap(d.my) ? 366 : 365) - minus_days, d.my);
+		if (!Date::is_valid(result_date.md, result_date.mm, result_date.my))
+			throw BadDate{result_date.md, result_date.mm, result_date.my};
+
+		return result_date;
 	}
 
 public: // static public data members
@@ -462,19 +460,19 @@ private: // nonstatic private data members
 	int my{year_base};
 };
 
-constexpr bool operator<=(const Date &d1, const Date &d2)
+constexpr bool operator<=(const Date &d1, const Date &d2) noexcept
 {
 	return d1 < d2 || d1 == d2;
 }
-constexpr bool operator>(const Date &d1, const Date &d2)
+constexpr bool operator>(const Date &d1, const Date &d2) noexcept
 {
 	return d2 < d1;
 }
-constexpr bool operator>=(const Date &d1, const Date &d2)
+constexpr bool operator>=(const Date &d1, const Date &d2) noexcept
 {
 	return d2 < d1 || d1 == d2;
 }
-constexpr bool operator!=(const Date &d1, const Date &d2)
+constexpr bool operator!=(const Date &d1, const Date &d2) noexcept
 {
 	return !(d1 == d2);
 }
